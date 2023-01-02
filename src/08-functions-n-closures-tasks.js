@@ -156,6 +156,10 @@ function retry(/* func, attempts */) {
  *
  */
 function logger(/* func, logFunc */) {
+  // return () => {
+  //   logFunc(func(), 'starts');
+  //   logFunc(func(), 'ends');
+  // };
   throw new Error('Not implemented');
 }
 
@@ -195,8 +199,13 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let id;
+  return () => {
+    if (id === undefined) id = startFrom;
+    id += 1;
+    return (id - 1);
+  };
 }
 
 
